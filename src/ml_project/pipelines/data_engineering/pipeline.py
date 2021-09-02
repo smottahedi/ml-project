@@ -26,22 +26,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Project pipelines."""
-from typing import Dict
+"""
+This is a boilerplate pipeline 'data_engineering'
+generated using Kedro 0.17.4
+"""
 
-from kedro.pipeline import Pipeline
-from ml_project.pipelines import data_engineering as de
+from kedro.pipeline import Pipeline, node
+from .nodes import split_data, standardize_features
 
 
-def register_pipelines() -> Dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-    """
-    data_engineering_pipeline = de.create_pipeline()
-
-    return {
-            "de": data_engineering_pipeline,
-            "__default__": data_engineering_pipeline
-        }
+def create_pipeline(**kwargs):
+    return Pipeline(
+            [
+                node(
+                        split_data,
+                        inputs=["iris_data", "params:example_test_data_ratio"],
+                        outputs=[
+                                "train_x_not_scaled",
+                                "train_data_y",
+                                "test_x_not_scaled",
+                                "test_data_y",
+                                ],
+                        name="split"
+                        ),
+                node(
+                        standardize_features,
+                        inputs=[
+                                "train_x_not_scaled",
+                                "test_x_not_scaled"
+                                ],
+                        outputs=[
+                                "train_x",
+                                "test_x"
+                                ],
+                        name="scale"
+                        )
+            ]
+        )
