@@ -1,0 +1,9 @@
+
+model_params:
+  kernel:
+    - 'linear'
+    - 'rbf'
+  C:
+    - 1
+    - 5
+    - 10
