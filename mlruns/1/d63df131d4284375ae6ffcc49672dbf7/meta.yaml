@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/smott/Projects/work/kedro-presentation/ml-project/mlruns/1/d63df131d4284375ae6ffcc49672dbf7/artifacts
+end_time: 1630548576556
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: d63df131d4284375ae6ffcc49672dbf7
+run_uuid: d63df131d4284375ae6ffcc49672dbf7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1630548573493
+status: 3
+tags: []
+user_id: smott
