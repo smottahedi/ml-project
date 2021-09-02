@@ -12,7 +12,9 @@ from sklearn import metrics
 from sklearn import svm
 from sklearn.model_selection import GridSearchCV
 from sklearn.base import ClassifierMixin
+
 mlflow.sklearn.autolog()
+
 
 def train_model(
     train_x: pd.DataFrame, train_y: pd.DataFrame, parameters: Dict[str, Any]
@@ -25,7 +27,7 @@ def train_model(
     Y = train_y.values
 
     svc = svm.SVC()
-    clf = GridSearchCV(svc, parameters['model_params'])
+    clf = GridSearchCV(svc, parameters["model_params"])
 
     clf.fit(X, Y)
 
@@ -34,11 +36,11 @@ def train_model(
 
 
 def predict(model: ClassifierMixin, test_x: pd.DataFrame) -> np.ndarray:
-    """Node for making predictions given a pre-trained model and a test set.
-    """
+    """Node for making predictions given a pre-trained model and a test set."""
     X = test_x.values
 
     return model.predict(X)
+
 
 def report_accuracy(predictions: np.ndarray, test_y: pd.DataFrame) -> None:
     """Node for reporting the accuracy of the predictions performed by the

@@ -37,29 +37,23 @@ from .nodes import split_data, standardize_features
 
 def create_pipeline(**kwargs):
     return Pipeline(
-            [
-                node(
-                        split_data,
-                        inputs=["iris_data", "params:example_test_data_ratio"],
-                        outputs=[
-                                "train_x_not_scaled",
-                                "train_data_y",
-                                "test_x_not_scaled",
-                                "test_data_y",
-                                ],
-                        name="split"
-                        ),
-                node(
-                        standardize_features,
-                        inputs=[
-                                "train_x_not_scaled",
-                                "test_x_not_scaled"
-                                ],
-                        outputs=[
-                                "train_x",
-                                "test_x"
-                                ],
-                        name="scale"
-                        )
-            ]
-        )
+        [
+            node(
+                split_data,
+                inputs=["iris_data", "params:example_test_data_ratio"],
+                outputs=[
+                    "train_x_not_scaled",
+                    "train_data_y",
+                    "test_x_not_scaled",
+                    "test_data_y",
+                ],
+                name="split",
+            ),
+            node(
+                standardize_features,
+                inputs=["train_x_not_scaled", "test_x_not_scaled"],
+                outputs=["train_x", "test_x"],
+                name="scale",
+            ),
+        ]
+    )
